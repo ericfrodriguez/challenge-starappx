@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema(
     {
-        confirmPassword: { type: String, require: true },
-        mail: { type: String, require: true },
-        name: { type: String, require: true },
-        password: { type: String, require: true },
-        username: { type: String, require: true }
+        confirmPassword: { type: String, required: true },
+        mail: { type: String, required: true },
+        name: { type: String, required: true },
+        password: { type: String, required: true },
+        username: { type: String, required: true }
     },{
         timestamps: true
     }
