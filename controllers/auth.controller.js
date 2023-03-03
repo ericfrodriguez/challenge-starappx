@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const bcryptjs = require('bcryptjs');
+const {defaultResponse} = require('../utils/response');
 
 const controller = {
     register: async (req, res, next) => {
@@ -8,9 +9,11 @@ const controller = {
 
             await User.create(req.body);
 
-            return res.status(200).json({
-                success: true
-            });
+            req.body.success = true;
+            req.body.sc = 201;
+            req.body.data = 'User registered';
+            
+            return defaultResponse(req, res);
         } catch (err) {
             next(err)
         }
