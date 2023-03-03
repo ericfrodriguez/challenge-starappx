@@ -1,6 +1,11 @@
+const User = require('../models/User');
+
 const controller = {
-    register: (req, res, next) => {
-        return res.json({
+    register: async (req, res, next) => {
+
+        const user = await User.create(req.body);
+
+        return res.status(200).json({
             user: req.body
         });
     },
