@@ -6,6 +6,7 @@ const controller = {
     register: async (req, res, next) => {
         try {
             req.body.password = bcryptjs.hashSync(req.body.password, 10);
+            req.body.confirmPassword = bcryptjs.hashSync(req.body.confirmPassword, 10);
 
             await User.create(req.body);
 
@@ -21,9 +22,25 @@ const controller = {
 
     },
     login: (req, res, next) => {
-        return res.json({
-            user: req.body
-        });
+
+        try {
+            console.log(req.user)
+            req.body.success = true;
+            req.body.sc = 200;
+            req.body.data = {
+                message: 'User logged',
+                user: {
+                    mail: req.user.mail,
+                    name: req.user.name,
+                    username: req.user.username
+                }
+            };
+
+            return defaultResponse(req, res);
+        } catch(err) {
+            next(err)
+        }
+
     }
 }
 
